@@ -5,22 +5,28 @@ import { NextUIProvider } from "@nextui-org/react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import ChatPage from "./pages/ChatPage.jsx";
+import { UserProvider } from "./contexts/UserContext.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
     errorElement: <ErrorPage />,
-    children: [
-      // { path: "gerar-link", element: <GerarLink /> },
-    ],
+  },
+  {
+    path: "/chat",
+    element: <ChatPage />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <NextUIProvider>
-      <RouterProvider router={router} />
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
     </NextUIProvider>
   </StrictMode>
 );
